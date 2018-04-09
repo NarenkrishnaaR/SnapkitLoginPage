@@ -20,9 +20,30 @@ class ViewController: UIViewController {
   let forgotPassword = UIButton()
   var tapCount = 0
   let stackView   = UIStackView()
+  let gitLabel : UILabel = {
+    let gitCommitLabel = UILabel()
+    gitCommitLabel.textColor = UIColor.white
+    gitCommitLabel.font = UIFont(name: "HelveticaNeue-CondensedBold", size: 16)
+    gitCommitLabel.textAlignment = .center
+    return gitCommitLabel
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    if  let git = Bundle.main.infoDictionary!["GIT_COMMIT_HASH"]{
+      print(git)
+    }
+      self.view.addSubview(gitLabel)
+      let gitCommitText = gitLabel
+//      gitCommitText.text = "\(git)"
+      gitCommitText.snp.makeConstraints { (commitText) in
+        commitText.top.equalToSuperview().offset(-50)
+        commitText.left.equalTo(10)
+        commitText.right.equalTo(-10)
+        commitText.height.equalTo(30)
+      }
+    
     self.view.backgroundColor = UIColor.black
     self.emailTextfield.isHidden = true
     self.passwordTextfield.isHidden = true
@@ -234,8 +255,8 @@ class ViewController: UIViewController {
 
 
 class D : Sample{
-
-
+  
+  
   func test(){
     
   }
